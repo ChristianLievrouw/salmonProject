@@ -5,6 +5,7 @@ var storeHours = ['6am', '7am', '8am', '9am', '10am', '11am', '12am', '1pm', '2p
 
 
 var seattleStore = {
+  sumOfCookieDay: 0,
   minHourCus: 23,
   maxHourCus: 65,
   avgCookiePerCus: 6.3,
@@ -22,6 +23,8 @@ var seattleStore = {
 
 };
 seattleStore.setCusPerHour();
+
+
 for(var i = 0; i < storeHours.length - 1; i++){
   seattleStore.setCookiesPerHour();
 }
@@ -29,13 +32,12 @@ function randomNumber(minHourCus, maxHourCus) {
   return Math.floor(Math.random() * (maxHourCus - minHourCus + 1) + minHourCus);
 }
 
-
-var mainElement = document.getElementById('list');
+var sectionElement = document.getElementById('list');
 var ul = document.createElement('ul');
 for(var i = 0; i < storeHours.length; i++) {
   var li = document.createElement('li');
-  li.textContent = 'At ' + storeHours[i] + ' we sold ' + seattleStore.cookiesSoldPerHour[i] + '!';
+  li.textContent = storeHours[i] + ': ' + seattleStore.cookiesSoldPerHour[i] + ' cookies';
   ul.append(li);
 }
-mainElement.appendChild(ul);
+sectionElement.appendChild(ul);
 
