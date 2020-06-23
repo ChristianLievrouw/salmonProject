@@ -231,19 +231,61 @@ function Store(storeName, minCus, maxCus, avgCookieSale){
   this.minCus = minCus;
   this.maxCus = maxCus;
   this.avgCookieSale = avgCookieSale;
-  // this.totalHourlyCookies = calcTotalHourlyCookies();
-  this.customerEachHour = calcTotalCustomerEachHour();
-  // this.totalCookiesDaily = calcCookiesDaily();
+  this.customerEachHour = [];
+  this.cookiesEachHour = [];
+  this.totalCookiesDaily = 0;
 }
+Store.prototype.calcTotalCustomerEachHour = function() {
+  for(var i = 0; i < storeHours.length; i++){
+    this.customerEachHour.push(randomCustomerNumbers(this.minCus, this.maxCus));
+    // console.log(this.customerEachHour);
+  }
+};
+Store.prototype.calcCookiesEachHour = function() {
+  this.calcTotalCustomerEachHour();
+  for(var i = 0; i < storeHours.length; i++) {
+    var oneHour = Math.ceil(this.customerEachHour[i] * this.avgCookieSale);
+    this.cookiesEachHour.push(oneHour);
+    console.log('this.cookiesEachHour', this.cookiesEachHour);
+    this.totalCookiesDaily = this.totalCookiesDaily + oneHour;
+    console.log('this.totalHourlyCookies', this.totalCookiesDaily);
+  }
+};
+Store.prototype.render = function() {
+  this.calcCookiesEachHour();
+  var table = document.getElementById('seattle');
+  for(var i = 0; i < storeHours.length; i++){
+    var listItems = document.createElement('li');
+    listItems.textContent = storeHours[i] + this.cookiesEachHour[i] + ' cookies.';
+    console.log('listItems.textContent');
+    table.appendChild(listItems);
+  }
+  listItems = document.createElement('li');
+  listItems.textContent = 'Totals: ' + this.totalCookiesDaily + ' cookies.';
+  console.log('listItems.textContent', listItems.textContent);
+  table.appendChild(listItems);
+};
 function randomCustomerNumbers(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
+var storeOne = new Store('Seattle', 23, 65, 6.3);
+var storeTwo = new Store('Tokyo', 3, 24, 1.2);
+var storeThree = new Store('Dubai', 3, 24, 1.2);
+var storeFour = new Store('Paris', 20, 38, 2.3);
+var storeFive = new Store('Lima', 2, 16, 4.6);
+var storeSix = new Store('Texas', 34, 56, 3.7); //Testing for loop
 
-function calcTotalCustomerEachHour() {
-  for(var i = 0; i < storeHours.length; i++){
-    this.customerEachHour.push(randomCustomerNumbers(this.minCus, this.maxCus));
-    console.log(calcTotalCustomerEachHour);
-  }
+
+var store = [storeOne, storeTwo, storeThree, storeFour, storeFive, storeSix];
+
+for(var i = 0; i < store.length; i++){
+  store[i].render();
 }
 
-var tokyoStore = new Store('tokyo', 13, 56, 6.3);
+var headOfTable = document.getElementById('tableHead');
+var tableRow = document.createElement('th');
+for(i = 0; i < storeHours.length; i++){
+  tableRow.textContent = storeHours[i];
+}
+headOfTable.appendChild(tableRow);
+tableRow.render();
