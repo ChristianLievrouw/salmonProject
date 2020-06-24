@@ -289,3 +289,4 @@ for(i = 0; i < storeHours.length; i++){
 }
 headOfTable.appendChild(tableRow);
 tableRow.render();
+
