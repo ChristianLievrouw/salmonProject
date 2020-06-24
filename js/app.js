@@ -85,19 +85,26 @@ var storeSix = new Store('Texas', 34, 56, 3.7); //Testing for loop
 
 var allStore = [storeOne, storeTwo, storeThree, storeFour, storeFive, storeSix];
 
-function makeHeaderRow(){
-//create some tags add 'Location
+// create some tags add 'Location
 // actually use the values from our store hours arrays for
-//create another tag daily total location. 
-
+// create another tag daily total location. 
+function makeHeaderRow(){
+  var mainHeader = document.getElementById('sales-table');
+  var timeLabel = document.createElement('th');
+  timeLabel.textContent = '';
+  mainHeader.appendChild(timeLabel);
+  for(var i = 0; i < storeHours.length; i++){
+    var timeHeader = document.createElement('th');
+    timeHeader.textContent = storeHours[i];
+    mainHeader.appendChild(timeHeader);
+  }
 }
 
 function makeFooterRow(){
-
-
-
-  for(){
-
+var mainFooter = document.getElementById('sales-table');
+var footer = document.createElement('tfoot');
+for(var i = 0; i < storeHours.length; i++){
+  
     for(){
 
     }
@@ -113,13 +120,13 @@ function makeFooterRow(){
 // The header row and footer row are each created in their own stand-alone function
 
 function renderAllData() {
-  //makeHeaderRow();
+  makeHeaderRow();
 
   for(var i = 0; i < allStore.length; i++){
     allStore[i].render();
   }
 
-//makeFooterRow();
+  //makeFooterRow();
 
 }
 
