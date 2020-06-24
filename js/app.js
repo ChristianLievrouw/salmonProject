@@ -98,18 +98,22 @@ function makeHeaderRow(){
     timeHeader.textContent = storeHours[i];
     mainHeader.appendChild(timeHeader);
   }
+  var totalRow = document.getElementById('sales-table');
+  var total = document.createElement('th');
+  total.textContent = 'Total';
+  totalRow.append(total);
 }
 
-function makeFooterRow(){
-var mainFooter = document.getElementById('sales-table');
-var footer = document.createElement('tfoot');
-for(var i = 0; i < storeHours.length; i++){
+// function makeFooterRow(){
+// var mainFooter = document.getElementById('sales-table');
+// var footer = document.createElement('tfoot');
+// for(var i = 0; i < storeHours.length; i++){
   
-    for(){
+//     for(){
 
-    }
-  }
-}
+//     }
+//   }
+// }
 
 
 

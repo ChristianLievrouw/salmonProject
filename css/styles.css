@@ -1,0 +1,16 @@
+* {
+  border: dotted;
+}
+body {
+  margin: auto;
+  background-color: tan;
+}
+img{
+  width: 200px;
+}
+header {
+  text-align: center;
+}
+table, th, td {
+  border: 2px solid black;
+}
