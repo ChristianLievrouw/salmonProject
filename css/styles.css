@@ -1,16 +1,34 @@
 * {
-  border: dotted;
+  /* border: dotted; */
 }
 body {
   margin: auto;
   background-color: tan;
 }
 img{
-  width: 200px;
+  width: 400px;
 }
 header {
   text-align: center;
+  background-color: burlywood;
+  font-size: 45px;
+  padding: 10px;
 }
 table, th, td {
   border: 2px solid black;
+  margin: 15px auto;
+  padding: 5px;
+}
+p {
+  text-align: center;
+  margin: 30px; auto;
+}
+footer {
+  background-color: burlywood;
+  padding: 30px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 50px;
 }

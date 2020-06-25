@@ -4,7 +4,7 @@ console.log('This file is connected.');
 var storeHours = ['6am: ', '7am: ', '8am: ', '9am: ', '10am: ', '11am: ', '12am: ', '1pm: ', '2pm: ', '3pm: ', '4pm: ', '5pm: ', '6pm: ', '7pm: '];
 
 function randomCustomerNumbers(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
+  return Math.floor(Math.random() * (max - min + 1) + min); // 1
 }
 
 var tableElement = document.getElementById('sales-table');
@@ -22,12 +22,12 @@ function Store(storeName, minCus, maxCus, avgCookieSale){
 
 Store.prototype.calcTotalCustomerEachHour = function() {
   for(var i = 0; i < storeHours.length; i++){
-    this.customerEachHour.push(randomCustomerNumbers(this.minCus, this.maxCus));
+    this.customerEachHour.push(randomCustomerNumbers(this.minCus, this.maxCus)); // F, 2
     // console.log(this.customerEachHour);
   }
 };
 Store.prototype.calcCookiesEachHour = function() {
-  this.calcTotalCustomerEachHour();
+  this.calcTotalCustomerEachHour(); // E, 3
   for(var i = 0; i < storeHours.length; i++) {
     var oneHour = Math.ceil(this.customerEachHour[i] * this.avgCookieSale);
     this.cookiesEachHour.push(oneHour);
@@ -44,10 +44,10 @@ Store.prototype.calcCookiesEachHour = function() {
 
 // Display each stores data in a table format similar to what is below. Break each column by the hour and complete each row with a “Daily Location Total”.
 Store.prototype.render = function() {
-  this.calcCookiesEachHour();
+  this.calcCookiesEachHour(); // D, 4
   //create tr
   var tableRow = document.createElement('tr');
-  //creat td 
+  //creat td
   var tableData = document.createElement('td');
   tableData.textContent = this.storeName;
   //append td to tr
@@ -87,52 +87,75 @@ var allStore = [storeOne, storeTwo, storeThree, storeFour, storeFive, storeSix];
 
 // create some tags add 'Location
 // actually use the values from our store hours arrays for
-// create another tag daily total location. 
+// create another tag daily total location.
+var salesTable = document.getElementById('sales-table');
 function makeHeaderRow(){
-  var mainHeader = document.getElementById('sales-table');
   var timeLabel = document.createElement('th');
-  timeLabel.textContent = '';
-  mainHeader.appendChild(timeLabel);
+  timeLabel.textContent = 'Locations';
+  salesTable.appendChild(timeLabel);
   for(var i = 0; i < storeHours.length; i++){
     var timeHeader = document.createElement('th');
     timeHeader.textContent = storeHours[i];
-    mainHeader.appendChild(timeHeader);
+    salesTable.appendChild(timeHeader);
   }
-  var totalRow = document.getElementById('sales-table');
   var total = document.createElement('th');
+
   total.textContent = 'Total';
-  totalRow.append(total);
+  salesTable.appendChild(total);
 }
-
-// function makeFooterRow(){
-// var mainFooter = document.getElementById('sales-table');
-// var footer = document.createElement('tfoot');
-// for(var i = 0; i < storeHours.length; i++){
-  
-//     for(){
-
-//     }
-//   }
-// }
-
-
-
-
-
-
-// Each cookie stand location should have a separate render() method that creates and appends its row to the table
-// The header row and footer row are each created in their own stand-alone function
+function makeFooterRow(){
+  var footerText = document.createElement('th');
+  footerText.textContent = 'Total Hourly';
+  salesTable.appendChild(footerText);
+  for(var i = 0; i < storeHours.length; i ++){
+    var totalOfHours = 0;
+    for(var j = 0; j < allStore.length; j++){
+      totalOfHours += allStore[j].cookiesEachHour[i];
+    }
+    var footerTotals = document.createElement('th');
+    footerTotals.textContent = totalOfHours;
+    salesTable.appendChild(footerTotals);
+  }
+  var finalTotal = document.createElement('th');
+  var totalValue = 0;
+  for(var x = 0; x < allStore.length; x++){
+    totalValue += allStore[x].totalCookiesDaily;
+  }
+  finalTotal.textContent = totalValue;
+  salesTable.appendChild(finalTotal);
+}
 
 function renderAllData() {
-  makeHeaderRow();
+  salesTable.innerHTML = '';
+  makeHeaderRow(); // B
 
   for(var i = 0; i < allStore.length; i++){
-    allStore[i].render();
+    allStore[i].render(); // C, DONE
   }
-
-  //makeFooterRow();
-
+  makeFooterRow(); // E
 }
 
+renderAllData(); // start A
 
-renderAllData();
+function handleFormSubmitted(event){
+  event.preventDefault();
+  var locationInput = document.getElementById('storeLocation');
+  var locationValue = locationInput.value;
+  var minCusInput = document.getElementById('minCus');
+  var minCusValue = minCusInput.value;
+  var maxCusInput = document.getElementById('maxCus');
+  var maxCusValue = maxCusInput.value;
+  var avgCookieInput = document.getElementById('avgCookieSale');
+  var avgCookeValue = avgCookieInput.value;
+
+  var newStore = new Store(locationValue, minCusValue, maxCusValue, avgCookeValue);
+  allStore.push(newStore);
+  renderAllData();
+  // makeFooterRow();
+
+  var form = document.getElementById('store-form');
+  form.reset();
+}
+
+var formElement = document.getElementById('store-form');
+formElement.addEventListener('submit', handleFormSubmitted);
