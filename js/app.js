@@ -132,7 +132,7 @@ function renderAllData() {
   for(var i = 0; i < allStore.length; i++){
     allStore[i].render(); // C, DONE
   }
-  makeFooterRow(); // E
+  makeFooterRow(); // E\
 }
 
 renderAllData(); // start A

@@ -1,5 +1,6 @@
 * {
   /* border: dotted; */
+  font-family: 'MuseoModerno', cursive;
 }
 body {
   margin: auto;
@@ -13,17 +14,19 @@ header {
   background-color: burlywood;
   font-size: 45px;
   padding: 10px;
+  display: block;
 }
 table, th, td {
   border: 2px solid black;
   margin: 15px auto;
   padding: 5px;
+  background-color: papayawhip;
 }
 p {
   text-align: center;
   margin: 30px; auto;
 }
-footer {
+/* footer {
   background-color: burlywood;
   padding: 30px;
   position: absolute;
@@ -31,4 +34,29 @@ footer {
   width: 100%;
   text-align: center;
   font-size: 50px;
+} */
+.index-nav{
+  float: right;
+}
+.index-nav li{
+  display: inline;
+  margin-right: 15px;
+  font-size: medium;
+  float: right;
+}
+td{
+  font-family: monospace;
+}
+.article-one{
+  display: block;
+  width: 50%;
+  float: left;
+  line-height: 25px;
+  text-align: center;
+}
+.article-two{
+  float: left;
+  width: 50%;
+  line-height: 25px;
+  text-align: center;
 }
