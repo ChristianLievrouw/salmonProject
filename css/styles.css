@@ -17,10 +17,15 @@ header {
   display: block;
 }
 table, th, td {
-  border: 2px solid black;
+  /* border: 2px solid black; */
   margin: 15px auto;
   padding: 5px;
   background-color: papayawhip;
+  border-radius: 50px;
+}
+td{
+  border: solid black;
+  border-radius: 10px;
 }
 p {
   text-align: center;
@@ -59,4 +64,9 @@ td{
   width: 50%;
   line-height: 25px;
   text-align: center;
+}
+fieldset{
+  padding: 50px;
+  border-radius: 25px;
+  border-color: green;
 }

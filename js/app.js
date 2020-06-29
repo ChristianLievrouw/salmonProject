@@ -45,12 +45,9 @@ Store.prototype.calcCookiesEachHour = function() {
 // Display each stores data in a table format similar to what is below. Break each column by the hour and complete each row with a “Daily Location Total”.
 Store.prototype.render = function() {
   this.calcCookiesEachHour(); // D, 4
-  //create tr
   var tableRow = document.createElement('tr');
-  //creat td
   var tableData = document.createElement('td');
   tableData.textContent = this.storeName;
-  //append td to tr
   tableRow.appendChild(tableData);
 
   //fill the table with data from objects
@@ -99,7 +96,6 @@ function makeHeaderRow(){
     salesTable.appendChild(timeHeader);
   }
   var total = document.createElement('th');
-
   total.textContent = 'Total';
   salesTable.appendChild(total);
 }
